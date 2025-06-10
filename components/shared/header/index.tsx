@@ -10,8 +10,10 @@ import Search from "./search";
 export default function Header() {
   return (
     <header className="bg-black text-white">
+      {/* Top Header */}
       <div className="px-2">
         <div className="flex items-center justify-between">
+          {/* Logo */}
           <div className="flex items-center">
             <Link
               href="/"
@@ -26,15 +28,20 @@ export default function Header() {
               <span className="hidden sm:block">{APP_NAME}</span>
             </Link>
           </div>
+          {/* Desktop Search */}
           <div className="hidden md:block flex-1 max-w-xl">
             <Search />
           </div>
+          {/* Menu Items */}
           <Menu />
         </div>
+        {/* Mobile Search */}
         <div className="md:hidden block py-2">
           <Search />
         </div>
       </div>
+
+      {/* Navbar */}
       <div className="flex items-center px-3 mb-[1px] bg-gray-800">
         <Button
           variant="ghost"
