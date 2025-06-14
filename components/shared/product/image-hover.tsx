@@ -18,7 +18,7 @@ const ImageHover = ({
 
   let hoverTimeout: any;
   const handleMouseEnter = () => {
-    hoverTimeout = setTimeout(() => setIsHovered(true), 1000); // 1 second delay
+    hoverTimeout = setTimeout(() => setIsHovered(true), 300); // 300 ms delay
   };
 
   const handleMouseLeave = () => {
