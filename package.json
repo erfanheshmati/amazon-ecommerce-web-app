@@ -25,7 +25,8 @@
     "react-medium-image-zoom": "^5.2.14",
     "tailwind-merge": "^3.0.1",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.25.57"
+    "zod": "^3.25.57",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
