@@ -8,3 +8,7 @@ export const APP_DESCRIPTION =
   "An Amazon store built with Next.js and MongoDB";
 
 export const PAGE_SIZE = Number(process.env.PAGE_SIZE || 9);
+
+export const FREE_SHIPPING_MIN_PRICE = Number(
+  process.env.FREE_SHIPPING_MIN_PRICE || 35
+);
