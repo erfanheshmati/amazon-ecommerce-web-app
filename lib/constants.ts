@@ -15,4 +15,4 @@ export const FREE_SHIPPING_MIN_PRICE = Number(
 
 export const APP_COPYRIGHT =
   process.env.NEXT_PUBLIC_APP_COPYRIGHT ||
-  `© 2025 ${APP_NAME}. All rights reserved.`;
+  `© ${new Date().getFullYear()} ${APP_NAME}. All rights reserved.`;

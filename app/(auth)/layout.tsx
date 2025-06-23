@@ -9,8 +9,8 @@ export default async function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center min-h-screen highlight-link">
-      <header className="mt-8">
+    <div className="flex flex-col items-center min-h-screen highlight-link pt-4 md:pt-8">
+      <header className="mt-auto">
         <Link href="/">
           <Image
             src="/icons/logo.svg"
@@ -26,9 +26,11 @@ export default async function AuthLayout({
         </Link>
       </header>
 
-      <main className="mx-auto max-w-sm min-w-80 p-4">{children}</main>
+      <main className="mx-auto max-w-sm min-w-80 p-4 mb-4 md:mb-8">
+        {children}
+      </main>
 
-      <footer className=" flex-1 mt-8  bg-gray-800 w-full flex flex-col gap-4 items-center p-8 text-sm">
+      <footer className="mt-auto bg-gray-800 w-full flex flex-col gap-4 items-center p-8 text-sm">
         <div className="flex justify-center space-x-4">
           <Link href="/page/conditions-of-use">Conditions of Use</Link>
           <Link href="/page/privacy-policy">Privacy Notice</Link>

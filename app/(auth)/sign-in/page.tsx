@@ -39,10 +39,11 @@ export default async function SignIn(props: {
           </div>
         </CardContent>
       </Card>
+
       <SeparatorWithOr>New to {APP_NAME}?</SeparatorWithOr>
 
       <Link href={`/sign-up?callbackUrl=${encodeURIComponent(callbackUrl)}`}>
-        <Button className="w-full" variant="outline">
+        <Button className="w-full mt-2" variant="outline">
           Create your {APP_NAME} account
         </Button>
       </Link>
