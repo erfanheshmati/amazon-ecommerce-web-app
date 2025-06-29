@@ -2,6 +2,10 @@ import { z } from "zod";
 import { formatNumberWithDecimal } from "./utils";
 
 // Common
+const MongoId = z
+  .string()
+  .regex(/^[0-9a-fA-F]{24}$/, { message: "Invalid MongoDB ID" });
+
 const Price = (field: string) =>
   z.coerce
     .number()
@@ -10,6 +14,7 @@ const Price = (field: string) =>
       `${field} must have exactly two decimal places (e.g., 49.99)`
     );
 
+// Product
 export const ProductInputSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters"),
   slug: z.string().min(3, "Slug must be at least 3 characters"),
@@ -45,7 +50,7 @@ export const ProductInputSchema = z.object({
     .nonnegative("Number of sales must be a non-negative number"),
 });
 
-// Order Item
+// Order
 export const OrderItemSchema = z.object({
   clientId: z.string().min(1, "clientId is required"),
   product: z.string().min(1, "Product is required"),
@@ -66,7 +71,6 @@ export const OrderItemSchema = z.object({
   color: z.string().optional(),
 });
 
-// Cart
 export const ShippingAddressSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
   street: z.string().min(1, "Address is required"),
@@ -77,6 +81,44 @@ export const ShippingAddressSchema = z.object({
   country: z.string().min(1, "Country is required"),
 });
 
+export const OrderInputSchema = z.object({
+  user: z.union([
+    MongoId,
+    z.object({
+      name: z.string(),
+      email: z.string().email(),
+    }),
+  ]),
+  items: z
+    .array(OrderItemSchema)
+    .min(1, "Order must contain at least one item"),
+  shippingAddress: ShippingAddressSchema,
+  paymentMethod: z.string().min(1, "Payment method is required"),
+  paymentResult: z
+    .object({
+      id: z.string(),
+      status: z.string(),
+      email_address: z.string(),
+      pricePaid: z.string(),
+    })
+    .optional(),
+  itemsPrice: Price("Items price"),
+  shippingPrice: Price("Shipping price"),
+  taxPrice: Price("Tax price"),
+  totalPrice: Price("Total price"),
+  expectedDeliveryDate: z
+    .date()
+    .refine(
+      (value) => value > new Date(),
+      "Expected delivery date must be in the future"
+    ),
+  isDelivered: z.boolean().default(false),
+  deliveredAt: z.date().optional(),
+  isPaid: z.boolean().default(false),
+  paidAt: z.date().optional(),
+});
+
+// Cart
 export const CartSchema = z.object({
   items: z
     .array(OrderItemSchema)
