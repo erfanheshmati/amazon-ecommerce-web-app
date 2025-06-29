@@ -22,7 +22,7 @@ export default async function UserButton() {
         <DropdownMenuTrigger className="header-button" asChild>
           <div className="flex items-center">
             <div className="flex flex-col text-xs text-left">
-              <span>{session ? session.user.name : "Sign in"}</span>
+              <span>{session ? session.user.name : "Login"}</span>
               <span className="font-bold">Account & Orders</span>
             </div>
             <ChevronDown />

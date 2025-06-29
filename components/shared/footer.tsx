@@ -27,7 +27,8 @@ export default function Footer() {
         <div className="flex justify-center text-sm">
           <p>
             {" "}
-            ©2000-{new Date().getFullYear()}, {APP_NAME}, Inc. or its affiliates
+            © 2000-{new Date().getFullYear()}, {APP_NAME}, Inc. or its
+            affiliates
           </p>
         </div>
         <div className="mt-8 flex justify-center text-sm text-gray-400">
