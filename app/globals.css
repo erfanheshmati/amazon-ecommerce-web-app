@@ -73,6 +73,10 @@ body {
 }
 
 @layer utilities {
+  .highlight-link a,
+  a.highlight-link {
+    @apply text-sky-700 hover:text-orange-700 hover:underline;
+  }
   .header-button {
     @apply cursor-pointer p-1 border border-transparent hover:border-white/20 rounded-[2px];
   }
@@ -82,8 +86,7 @@ body {
   .h2-bold {
     @apply font-bold text-lg lg:text-xl;
   }
-  .highlight-link a,
-  a.highlight-link {
-    @apply text-sky-700 hover:text-orange-700 hover:underline;
+  .flex-between {
+    @apply flex justify-between items-center;
   }
 }
