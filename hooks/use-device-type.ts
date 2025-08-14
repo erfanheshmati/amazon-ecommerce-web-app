@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useDeviceType() {
+export default function useDeviceType() {
   const [deviceType, setDeviceType] = useState("unknown");
 
   useEffect(() => {
@@ -16,5 +16,3 @@ function useDeviceType() {
 
   return deviceType;
 }
-
-export default useDeviceType;
