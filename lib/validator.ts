@@ -146,7 +146,7 @@ export const CartSchema = z.object({
   expectedDeliveryDate: z.optional(z.date()),
 });
 
-// USER
+// User
 const UserName = z
   .string()
   .min(2, { message: "Username must be at least 2 characters" })
@@ -189,4 +189,8 @@ export const UserSignUpSchema = UserSignInSchema.extend({
 
 export const UserNameSchema = z.object({
   name: UserName,
+});
+
+export const ProductUpdateSchema = ProductInputSchema.extend({
+  _id: z.string(),
 });
