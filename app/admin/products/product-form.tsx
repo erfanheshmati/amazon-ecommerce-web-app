@@ -25,6 +25,7 @@ import { ProductInputSchema } from "@/lib/validator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toSlug } from "@/lib/utils";
 import { z } from "zod";
+import { Trash } from "lucide-react";
 
 type ProductFormData = z.infer<typeof ProductInputSchema>;
 
@@ -267,14 +268,29 @@ export default function ProductForm({
                   <CardContent className="space-y-2 mt-2 min-h-48">
                     <div className="flex justify-start items-center space-x-2">
                       {images.map((image: string) => (
-                        <Image
-                          key={image}
-                          src={image}
-                          alt="product image"
-                          className="w-20 h-20 object-cover object-center rounded-sm"
-                          width={100}
-                          height={100}
-                        />
+                        <Card key={image} className="relative ">
+                          <Image
+                            src={image}
+                            alt="product image"
+                            className="w-36 h-36 object-cover object-center rounded-sm"
+                            width={100}
+                            height={100}
+                          />
+                          <Button
+                            variant={"destructive"}
+                            className="absolute top-1 right-1"
+                            type="button"
+                            size="icon"
+                            onClick={() => {
+                              form.setValue(
+                                "images",
+                                images.filter((img) => img !== image)
+                              );
+                            }}
+                          >
+                            <Trash />
+                          </Button>
+                        </Card>
                       ))}
                       <FormControl>
                         <UploadButton

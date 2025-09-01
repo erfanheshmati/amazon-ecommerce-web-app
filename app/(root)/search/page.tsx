@@ -113,7 +113,7 @@ export default async function SearchPage(props: {
     page: Number(page),
     sort,
   });
-  
+
   return (
     <div>
       <div className="mb-2 py-2 md:border-b flex-between flex-col md:flex-row ">
@@ -268,8 +268,8 @@ export default async function SearchPage(props: {
               <ProductCard key={product._id} product={product} />
             ))}
           </div>
-          {data!.totalPages! > 1 && (
-            <Pagination page={page} totalPages={data!.totalPages} />
+          {data.totalPages > 1 && (
+            <Pagination page={page} totalPages={data.totalPages} />
           )}
         </div>
       </div>
