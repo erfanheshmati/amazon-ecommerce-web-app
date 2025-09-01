@@ -16,14 +16,18 @@ import { IOrder } from "@/lib/db/models/order.model";
 import { cn, formatDateTime } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
 import ProductPrice from "../product/product-price";
+import ActionButton from "../action-button";
+import { deliverOrder, updateOrderToPaid } from "@/lib/actions/order.actions";
 
 export default function OrderDetailsForm({
   order,
+  isAdmin,
 }: {
   order: IOrder;
   isAdmin: boolean;
 }) {
   const {
+    _id,
     shippingAddress,
     items,
     itemsPrice,
@@ -67,6 +71,14 @@ export default function OrderDetailsForm({
                 </div>
               </div>
             )}
+            {isAdmin && isPaid && !isDelivered && (
+              <div className="mt-4">
+                <ActionButton
+                  caption="Mark as delivered"
+                  action={() => deliverOrder(_id)}
+                />
+              </div>
+            )}
           </CardContent>
         </Card>
         <Card>
@@ -78,10 +90,18 @@ export default function OrderDetailsForm({
             ) : (
               <Badge variant="destructive">Not paid</Badge>
             )}
+            {isAdmin && !isPaid && paymentMethod === "Cash On Delivery" && (
+              <div className="mt-4">
+                <ActionButton
+                  caption="Mark as paid"
+                  action={() => updateOrderToPaid(_id)}
+                />
+              </div>
+            )}
           </CardContent>
         </Card>
         <Card>
-          <CardContent className="p-4   gap-4">
+          <CardContent className="p-4 gap-4">
             <h2 className="text-xl pb-4">Order Items</h2>
             <Table>
               <TableHeader>
@@ -121,33 +141,29 @@ export default function OrderDetailsForm({
       </div>
       <div>
         <Card>
-          <CardContent className="p-4  space-y-4 gap-4">
+          <CardContent className="p-4 space-y-4 gap-4">
             <h2 className="text-xl pb-4">Order Summary</h2>
             <div className="flex justify-between">
               <div>Items</div>
               <div>
-                {" "}
                 <ProductPrice price={itemsPrice} plain />
               </div>
             </div>
             <div className="flex justify-between">
               <div>Tax</div>
               <div>
-                {" "}
                 <ProductPrice price={taxPrice} plain />
               </div>
             </div>
             <div className="flex justify-between">
               <div>Shipping</div>
               <div>
-                {" "}
                 <ProductPrice price={shippingPrice} plain />
               </div>
             </div>
             <div className="flex justify-between">
               <div>Total</div>
               <div>
-                {" "}
                 <ProductPrice price={totalPrice} plain />
               </div>
             </div>
@@ -155,7 +171,7 @@ export default function OrderDetailsForm({
             {!isPaid && ["Stripe", "PayPal"].includes(paymentMethod) && (
               <Link
                 className={cn(buttonVariants(), "w-full")}
-                href={`/checkout/${order._id}`}
+                href={`/checkout/${_id}`}
               >
                 Pay Order
               </Link>

@@ -43,15 +43,21 @@ export default async function UserButton() {
             </DropdownMenuLabel>
             <DropdownMenuGroup>
               <Link className="w-full" href="/account">
-                <DropdownMenuItem>Your account</DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-neutral-100 cursor-pointer">
+                  Your account
+                </DropdownMenuItem>
               </Link>
               <Link className="w-full" href="/account/orders">
-                <DropdownMenuItem>Your orders</DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-neutral-100 cursor-pointer">
+                  Your orders
+                </DropdownMenuItem>
               </Link>
 
               {session.user.role === "Admin" && (
                 <Link className="w-full" href="/admin/overview">
-                  <DropdownMenuItem>Admin</DropdownMenuItem>
+                  <DropdownMenuItem className="hover:bg-neutral-100 cursor-pointer">
+                    Admin
+                  </DropdownMenuItem>
                 </Link>
               )}
             </DropdownMenuGroup>
