@@ -10,6 +10,7 @@ import {
   UserNameSchema,
   UserSignInSchema,
   UserSignUpSchema,
+  WebPageInputSchema,
 } from "@/lib/validator";
 
 export type IReviewInput = z.infer<typeof ReviewInputSchema>;
@@ -42,9 +43,10 @@ export type Data = {
     buttonCaption: string;
     isPublished: boolean;
   }[];
+  webPages: IWebPageInput[];
 };
 
-// Order
+// ORDER
 export type IOrderInput = z.infer<typeof OrderInputSchema>;
 export type OrderItem = z.infer<typeof OrderItemSchema>;
 export type Cart = z.infer<typeof CartSchema>;
@@ -58,8 +60,11 @@ export type IOrderList = IOrderInput & {
   createdAt: Date;
 };
 
-// User
+// USER
 export type IUserInput = z.infer<typeof UserInputSchema>;
 export type IUserSignIn = z.infer<typeof UserSignInSchema>;
 export type IUserSignUp = z.infer<typeof UserSignUpSchema>;
 export type IUserName = z.infer<typeof UserNameSchema>;
+
+// WEBPAGE
+export type IWebPageInput = z.infer<typeof WebPageInputSchema>;

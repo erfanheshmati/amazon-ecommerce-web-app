@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { formatNumberWithDecimal } from "./utils";
 
-// Common
+// COMMON
 const MongoId = z
   .string()
   .regex(/^[0-9a-fA-F]{24}$/, { message: "Invalid MongoDB ID" });
@@ -14,7 +14,7 @@ const Price = (field: string) =>
       `${field} must have exactly two decimal places (e.g., 49.99)`
     );
 
-// Product
+// PRODUCT
 export const ReviewInputSchema = z.object({
   product: MongoId,
   user: MongoId,
@@ -63,7 +63,7 @@ export const ProductInputSchema = z.object({
     .nonnegative("Number of sales must be a non-negative number"),
 });
 
-// Order
+// ORDER
 export const OrderItemSchema = z.object({
   clientId: z.string().min(1, "clientId is required"),
   product: z.string().min(1, "Product is required"),
@@ -131,7 +131,7 @@ export const OrderInputSchema = z.object({
   paidAt: z.date().optional(),
 });
 
-// Cart
+// CART
 export const CartSchema = z.object({
   items: z
     .array(OrderItemSchema)
@@ -146,7 +146,7 @@ export const CartSchema = z.object({
   expectedDeliveryDate: z.optional(z.date()),
 });
 
-// User
+// USER
 const UserName = z
   .string()
   .min(2, { message: "Username must be at least 2 characters" })
@@ -201,3 +201,15 @@ export const UserUpdateSchema = z.object({
   email: Email,
   role: UserRole,
 });
+
+// WEBPAGE
+export const WebPageInputSchema = z.object({
+  title: z.string().min(3, 'Title must be at least 3 characters'),
+  slug: z.string().min(3, 'Slug must be at least 3 characters'),
+  content: z.string().min(1, 'Content is required'),
+  isPublished: z.boolean(),
+})
+
+export const WebPageUpdateSchema = WebPageInputSchema.extend({
+  _id: z.string(),
+})
