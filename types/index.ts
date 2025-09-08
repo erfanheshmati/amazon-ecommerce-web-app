@@ -1,11 +1,17 @@
 import { z } from "zod";
 import {
+  CarouselSchema,
   CartSchema,
+  DeliveryDateSchema,
   OrderInputSchema,
   OrderItemSchema,
+  PaymentMethodSchema,
   ProductInputSchema,
   ReviewInputSchema,
+  SettingInputSchema,
   ShippingAddressSchema,
+  SiteCurrencySchema,
+  SiteLanguageSchema,
   UserInputSchema,
   UserNameSchema,
   UserSignInSchema,
@@ -44,6 +50,7 @@ export type Data = {
     isPublished: boolean;
   }[];
   webPages: IWebPageInput[];
+  settings: ISettingInput[];
 };
 
 // ORDER
@@ -68,3 +75,14 @@ export type IUserName = z.infer<typeof UserNameSchema>;
 
 // WEBPAGE
 export type IWebPageInput = z.infer<typeof WebPageInputSchema>;
+
+// SETTING
+export type ICarousel = z.infer<typeof CarouselSchema>;
+export type ISettingInput = z.infer<typeof SettingInputSchema>;
+export type ClientSetting = ISettingInput & {
+  currency: string;
+};
+export type SiteLanguage = z.infer<typeof SiteLanguageSchema>;
+export type SiteCurrency = z.infer<typeof SiteCurrencySchema>;
+export type PaymentMethod = z.infer<typeof PaymentMethodSchema>;
+export type DeliveryDate = z.infer<typeof DeliveryDateSchema>;

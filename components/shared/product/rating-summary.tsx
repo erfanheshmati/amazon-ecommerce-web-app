@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
 import { ChevronDownIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 type RatingSummaryProps = {
   asPopover?: boolean;
@@ -28,6 +29,8 @@ export default function RatingSummary({
   numReviews = 0,
   ratingDistribution = [],
 }: RatingSummaryProps) {
+  const t = useTranslations();
+
   const RatingDistribution = () => {
     const ratingPercentageDistribution = ratingDistribution.map((x) => ({
       ...x,
@@ -39,10 +42,14 @@ export default function RatingSummary({
         <div className="flex flex-wrap items-center gap-1 cursor-help">
           <Rating rating={avgRating} />
           <span className="text-lg font-semibold">
-            {avgRating.toFixed(1)} out of 5
+            {t("Product.avgRating out of 5", {
+              avgRating: avgRating.toFixed(1),
+            })}
           </span>
         </div>
-        <div className="text-lg ">{numReviews} ratings</div>
+        <div className="text-lg ">
+          {t("Product.numReviews ratings", { numReviews })}
+        </div>
 
         <div className="space-y-3">
           {ratingPercentageDistribution
@@ -52,7 +59,10 @@ export default function RatingSummary({
                 key={rating}
                 className="grid grid-cols-[50px_1fr_30px] gap-2 items-center"
               >
-                <div className="text-sm"> {rating} star</div>
+                <div className="text-sm">
+                  {" "}
+                  {t("Product.rating star", { rating })}
+                </div>
                 <Progress value={percentage} className="h-4" />
                 <div className="text-sm text-right">{percentage}%</div>
               </div>
@@ -78,14 +88,14 @@ export default function RatingSummary({
             <Separator />
 
             <Link className="highlight-link text-center" href="#reviews">
-              See customer reviews
+              {t("Product.See customer reviews")}
             </Link>
           </div>
         </PopoverContent>
       </Popover>
       <div className=" ">
         <Link href="#reviews" className="highlight-link">
-          {numReviews} ratings
+          {t("Product.numReviews ratings", { numReviews })}
         </Link>
       </div>
     </div>

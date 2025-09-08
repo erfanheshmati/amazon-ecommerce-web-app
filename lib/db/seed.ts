@@ -16,13 +16,17 @@ import {
 } from "../utils";
 import { AVAILABLE_DELIVERY_DATES } from "../constants";
 import WebPage from "./models/web-page.model";
+import Setting from "./models/setting.model";
 
 loadEnvConfig(cwd());
 
 const main = async () => {
   try {
-    const { products, users, reviews, webPages } = data;
+    const { products, users, reviews, webPages, settings } = data;
     await connectToDatabase(process.env.MONGODB_URI);
+
+    await Setting.deleteMany();
+    const createdSetting = await Setting.insertMany(settings);
 
     await WebPage.deleteMany();
     await WebPage.insertMany(webPages);
@@ -73,6 +77,7 @@ const main = async () => {
       createdProducts,
       createdReviews,
       createdOrders,
+      createdSetting,
       message: "Seeded database successfully",
     });
     process.exit(0);

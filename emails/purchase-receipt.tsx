@@ -1,6 +1,6 @@
 import { formatCurrency } from "@/lib/utils";
 import { IOrder } from "@/lib/db/models/order.model";
-import { SERVER_URL } from "@/lib/constants";
+import { getSetting } from "@/lib/actions/setting.actions";
 import {
   Body,
   Column,
@@ -67,6 +67,8 @@ const dateFormatter = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
 export default async function PurchaseReceiptEmail({
   order,
 }: OrderInformationProps) {
+  const { site } = await getSetting();
+
   return (
     <Html>
       <Preview>View order receipt</Preview>
@@ -105,21 +107,21 @@ export default async function PurchaseReceiptEmail({
               {order.items.map((item) => (
                 <Row key={item.product} className="mt-8">
                   <Column className="w-20">
-                    <Link href={`${SERVER_URL}/product/${item.slug}`}>
+                    <Link href={`${site.url}/product/${item.slug}`}>
                       <Img
                         width="80"
                         alt={item.name}
                         className="rounded"
                         src={
                           item.image.startsWith("/")
-                            ? `${SERVER_URL}${item.image}`
+                            ? `${site.url}${item.image}`
                             : item.image
                         }
                       />
                     </Link>
                   </Column>
                   <Column className="align-top">
-                    <Link href={`${SERVER_URL}/product/${item.slug}`}>
+                    <Link href={`${site.url}/product/${item.slug}`}>
                       <Text className="mx-2 my-0">
                         {item.name} x {item.quantity}
                       </Text>
