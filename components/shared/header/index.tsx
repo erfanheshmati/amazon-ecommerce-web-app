@@ -28,7 +28,7 @@ export default async function Header() {
                 height={40}
                 alt={`${site.name} logo`}
               />
-              {site.name}
+              <span className="ml-2">{site.name}</span>
             </Link>
           </div>
 
